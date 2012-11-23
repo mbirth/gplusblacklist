@@ -29,10 +29,8 @@ readBlacklist = function() {
 }
 
 removeBlacklistItem = function(id) {
-    console.log("try remove: " + id);
     var needles = JSON.parse(localStorage.getItem("blacklist"));
     if (needles[id]) {
-        console.log("remove: " + id);
         needles.splice(id, 1);
         localStorage.setItem("blacklist", JSON.stringify(needles));
     }
