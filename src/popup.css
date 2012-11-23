@@ -1,0 +1,47 @@
+body {
+    min-width: 300px;
+    overflow-x: hidden;
+    font-family: sans;
+    font-size: smaller;
+}
+#headline {
+    font-weight: bold;
+    padding: 3px;
+}
+#blacklist_items {
+    max-height: 500px;
+    overflow: auto;
+}
+#blacklist_add {
+    padding: 3px;
+}
+#addword_text {
+    width: 200px;
+}
+#addword_btn {
+    float: right;
+    clear: right;
+}
+.blacklist_item {
+    height: 25px;
+    padding: 3px;
+    border: 1px solid #f5eeff;
+    font-family: monospace;
+}
+.blacklist_item div {
+    float: left;
+    width: 225px;
+    margin: 5px 0px 0px 5px;
+}
+.blacklist_item  input{
+    float: right;
+    clear: right;
+    width: 60px;
+    height: 25px;
+}
+.light {
+    background-color: #ffffff;
+}
+.dark {
+    background-color: #f5eeff;
+}
