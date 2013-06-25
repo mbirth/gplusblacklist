@@ -3,12 +3,12 @@ readBlacklist = ->
     blacklistItemsDiv = document.getElementById('blacklist_items')
     blacklistItemsDiv.innerHTML = ''
     if not needles then return
-    for own i of needles
+    for needle, i in needles
         color = if i%2 is not 0 then 'dark' else 'light'
         newdiv = document.createElement('div')
         newdiv.setAttribute('id', "blacklist_item_#{i}")
         newdiv.setAttribute('class', "blacklist_item #{color}")
-        newdiv.innerHTML = "<div>#{needles[i]}</div>"
+        newdiv.innerHTML = "<div>#{needle}</div>"
 
         newbtn = document.createElement('input')
         newbtn.setAttribute('type', 'button')

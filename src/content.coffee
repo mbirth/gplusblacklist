@@ -1,23 +1,23 @@
 blacklistFilter = (blacklist) ->
     if not blacklist then return
     nodes = document.getElementsByClassName('Tg')
-    for own i of nodes
-        hideBtn = nodes[i].getElementsByClassName('hidden')
+    for node, i in nodes
+        hideBtn = node.getElementsByClassName('hidden')
         if hideBtn[0]
-            contents = nodes[i].getElementsByClassName('qf')
+            contents = node.getElementsByClassName('qf')
             contents[0]?.style.display = 'block'
-            nodes[i].removeChild(hideBtn[0])
+            node.removeChild(hideBtn[0])
 
-        for own j of blacklist
-            if nodes[i].innerHTML.toLowerCase().indexOf(blacklist[j].toLowerCase()) is -1
-                continue
-            contents = nodes[i].getElementsByClassName('qf')
+        for blentry, j in blacklist
+            continue if node.innerHTML.toLowerCase().indexOf(blentry.toLowerCase()) is -1
+
+            contents = node.getElementsByClassName('qf')
             contents[0]?.style.display = 'none'
 
             newdiv = document.createElement('div')
             newdiv.setAttribute('id', "blacklist_item_#{i}")
             newdiv.setAttribute('class', 'hidden')
-            newdiv.innerHTML = "Hidden: \"#{blacklist[j]}\""
+            newdiv.innerHTML = "Hidden: \"#{blentry}\""
 
             newbtn = document.createElement('input')
             newbtn.setAttribute('type', 'button')
@@ -32,13 +32,13 @@ blacklistFilter = (blacklist) ->
             newbtn.addEventListener('click', removeFunc, false)
             newdiv.appendChild(newbtn)
 
-            nodes[i].appendChild(newdiv)
+            node.appendChild(newdiv)
 
 blacklist = ->
     chrome.extension.sendRequest(
         method: 'getBlacklist',
         (response) ->
-            if response.blacklist then blacklistFilter(response.blacklist)
+            blacklistFilter(response.blacklist) if response.blacklist
     )
 
 chrome.extension.onMessage.addListener( (request, sender, sendResponse) -> blacklistFilter(request.blacklist) )
