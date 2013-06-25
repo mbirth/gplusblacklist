@@ -15,7 +15,7 @@ all: other coffee
 coffee: $(BUILD)
 
 $(BUILDDIR)/%.js: $(SRCDIR)/%.coffee
-	$(CC) -cs < $< > $@
+	$(CC) -o $(BUILDDIR)/ -c $<
 
 # other files
 
