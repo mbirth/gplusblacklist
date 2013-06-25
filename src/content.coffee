@@ -47,6 +47,6 @@ blacklist()
 
 document.getElementsByClassName('ow')[0].addEventListener( 'DOMNodeInserted',
     (event) ->
-        blacklist() if event.target.children?[0]?.firstChild?.className? is 'ii'
+        blacklist() if event.target.children[1]?.getAttribute('role') is 'article'
     , false
 )
