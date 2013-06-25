@@ -1,9 +1,10 @@
 {
     "name": "G+ Blacklist",
-    "version": "0.1",
+    "version": "2013.6.24",
     "manifest_version": 2,
     "description": "Blacklist for Google+",
-    "browser_action": {
+    "homepage_url": "https://github.com/mbirth/gplusblacklist",
+    "page_action": {
         "default_title": "Blacklist for Google+",
         "default_popup": "popup.html",
         "default_icon": "gplusblacklist_48.png"
