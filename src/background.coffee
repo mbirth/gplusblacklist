@@ -6,8 +6,8 @@ chrome.tabs.onUpdated.addListener(
 
 chrome.extension.onRequest.addListener(
     (request, sender, sendResponse) ->
-        if request.method is "getBlacklist"
+        if request.method is 'getBlacklist'
             sendResponse(
-                blacklist: JSON.parse(localStorage["blacklist"])
+                blacklist: JSON.parse(localStorage['blacklist'])
             )
 )
