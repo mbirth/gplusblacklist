@@ -38,3 +38,10 @@ gplusblacklist.crx: $(ALL_OTHER_FILES) $(BUILD) key.pem
 	google-chrome --pack-extension="$(BUILDDIR)/" --pack-extension-key="key.pem"
 	mv $(BUILDDIR).crx $@
 	-rm libpeerconnection.log
+
+# cleanup
+
+.PHONY: clean
+clean:
+	-rm $(BUILDDIR)/*
+	-rm gplusblacklist.crx
