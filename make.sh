@@ -4,27 +4,33 @@ if [ ! -f key.pem ]; then
 fi
 
 SRCDIR="src"
+BUILDDIR="build"
 FILENAME="gplusblacklist"
 
-NAME=`grep "\"name\":" src/manifest.json | sed -e 's/^.*: "\(.*\)\".*$/\1/'`
-VERSION=`grep "\"version\":" src/manifest.json | sed -e 's/^.*: "\(.*\)\".*$/\1/'`
+rm $BUILDDIR/*
+
+find "$SRCDIR/" -type f ! -name "*.coffee" -exec cp {} "$BUILDDIR/" \;
+coffee -o "$BUILDDIR/" -c "$SRCDIR/"
+
+NAME=`grep "\"name\":" "$BUILDDIR/manifest.json" | sed -e 's/^.*: "\(.*\)\".*$/\1/'`
+VERSION=`grep "\"version\":" "$BUILDDIR/manifest.json" | sed -e 's/^.*: "\(.*\)\".*$/\1/'`
 OUTPUT="$FILENAME-$VERSION.crx"
 
-if [ -f "$SRCDIR.crx" ]; then
-    echo "Cleaning up old $SRCDIR.crx."
-    rm "$SRCDIR.crx"
+if [ -f "$BUILDDIR.crx" ]; then
+    echo "Cleaning up old $BUILDDIR.crx."
+    rm "$BUILDDIR.crx"
 fi
 
 echo "Generating $NAME $VERSION..."
-google-chrome --pack-extension="$SRCDIR/" --pack-extension-key="key.pem" >/dev/null
+google-chrome --pack-extension="$BUILDDIR/" --pack-extension-key="key.pem" >/dev/null
 
-if [ ! -f "$SRCDIR.crx" ]; then
+if [ ! -f "$BUILDDIR.crx" ]; then
     echo "ERROR: Could not compile extension!"
     exit 1
 fi
 
 # rename output file
-mv "$SRCDIR.crx" "$OUTPUT"
+mv "$BUILDDIR.crx" "$OUTPUT"
 
 echo "Compiled $OUTPUT ."
 
